@@ -1,0 +1,21 @@
+name: mongos
+services: 
+  monouser_mongo:
+    image: mongo:7.0
+    command: ["--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - 27044:27017
+    volumes:
+      - "monouser_mongo_data:/data/db"
+      - "monouser_mongo_config:/data/configdb"
+  mongosetup:
+    image: mongo:7.0
+    depends_on:
+      - monouser_mongo
+    volumes:
+      - ./mongodb/scripts:/scripts
+    restart: "no"
+    entrypoint: [ "bash", "/scripts/init.sh"]
+volumes:
+  monouser_mongo_data:
+  monouser_mongo_config:

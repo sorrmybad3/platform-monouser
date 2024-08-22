@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  deleted Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String @unique
+  email String @unique
+
+  @@map("companies")
+}
+
+model Shop {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  deleted Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  companyId String
+  name String @unique
+  email String @unique
+
+  @@map("shops")
+}
+
+model Employee {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  deleted Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  companyId String
+  shopId String
+  email String @unique
+  name  String
+  password String @default("")
+
+  @@map("employees")
+}
+
+model Patient {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  deleted Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  companyId String
+  shopId String
+  employeeId String
+  name String
+  email String @unique
+  phone String
+  address String
+  birthDate DateTime
+
+  @@map("patients")
+}

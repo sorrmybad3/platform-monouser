@@ -1,0 +1,36 @@
+services:
+  e2e_mongo:
+    image: mongo:7.0
+    command: ["--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - 27045:27017
+    volumes:
+      - e2e_mongo_data:/data/db
+      - e2e_mongo_config:/data/configdb
+
+  e2e_mongosetup:
+    image: mongo:7.0
+    depends_on:
+      - e2e_mongo
+    volumes:
+      - ./mongodb/scripts:/scripts
+    entrypoint: [ "bash", "/scripts/init.sh"]
+    restart: "no"
+
+  e2e_tests:
+    image: node:20  # Replace with the appropriate Node.js version
+    depends_on:
+      - e2e_mongo
+      - e2e_mongosetup
+    working_dir: /app
+    volumes:
+      - .:/app
+      - ./.env.test:/app/.env.local
+    command: >
+      sh -c "yarn install && yarn add dotenv-cli && yarn run test:e2e"
+    environment:
+      - MONGO_URI=mongodb://e2e_mongo:27017/testdb
+
+volumes:
+  e2e_mongo_data:
+  e2e_mongo_config:
