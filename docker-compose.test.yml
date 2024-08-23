@@ -4,9 +4,6 @@ services:
     command: ["--replSet", "rs0", "--bind_ip_all"]
     ports:
       - 27045:27017
-    volumes:
-      - e2e_mongo_data:/data/db
-      - e2e_mongo_config:/data/configdb
 
   e2e_mongosetup:
     image: mongo:7.0
@@ -25,12 +22,6 @@ services:
     working_dir: /app
     volumes:
       - .:/app
-      - ./.env.test:/app/.env.local
+      - ./.env.test:/app/.env.test
     command: >
-      sh -c "yarn install && yarn add dotenv-cli && yarn run test:e2e"
-    environment:
-      - MONGO_URI=mongodb://e2e_mongo:27017/testdb
-
-volumes:
-  e2e_mongo_data:
-  e2e_mongo_config:
+      sh -c "yarn install && yarn add dotenv-cli && yarn run container:test:migrate && yarn run container:test:e2e"
