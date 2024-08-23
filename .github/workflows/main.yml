@@ -29,15 +29,15 @@ jobs:
 
     - name: Build MongoDB for tests
       run: |
-        docker-compose -f docker-compose.test.yml up --build -d --name e2e_mongo
+        docker-compose -f docker-compose.test.yml up --build -d e2e_mongo
 
     - name: Set up  replica set
       run: |
-        docker-compose -f docker-compose.test.yml up --build -d --name e2e_mongosetup
+        docker-compose -f docker-compose.test.yml up --build -d e2e_mongosetup
 
     - name: Run tests
       run: |
-        docker-compose -f docker-compose.test.yml up --build -d --name e2e_tests
+        docker-compose -f docker-compose.test.yml up --build -d e2e_tests
 
     - name: Shutdown services
       run: |
