@@ -29,7 +29,7 @@ export class CompanyService {
 
     const response: SimpleCreatedResponse = {
       id: employee.id,
-      message: 'Company registered successfully',
+      message: 'Company registered successfully.',
     };
 
     return response;

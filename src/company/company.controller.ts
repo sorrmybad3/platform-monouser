@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, HttpCode } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CompanyService } from './company.service';
 import { RegisterCompanyDto } from './company.dto';
@@ -11,6 +11,6 @@ export class CompanyController {
   @Post('register')
   @ApiOperation({ summary: 'Register a new company, shop and admin employee.' })
   register(@Body() dto: RegisterCompanyDto) {
-    this.companyService.register(dto);
+    return this.companyService.register(dto);
   }
 }
