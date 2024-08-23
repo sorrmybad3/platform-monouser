@@ -42,7 +42,7 @@ describe('AppController (e2e)', () => {
 
     let registerCompanyResponse: SimpleCreatedResponse = {
       id: faker.string.sample(),
-      message: 'Company registered successfully.',
+      message: 'Company completed successfully.',
     };
 
     //TODO: Abstract this into a helper function
