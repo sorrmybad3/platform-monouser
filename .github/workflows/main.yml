@@ -27,17 +27,9 @@ jobs:
         sudo apt-get update
         sudo apt-get install docker-compose -y
 
-    - name: Build MongoDB for tests
+    - name: Run tests.
       run: |
-        docker-compose -f docker-compose.test.yml up --build -d e2e_mongo
-
-    - name: Set up  replica set
-      run: |
-        docker-compose -f docker-compose.test.yml up --build -d e2e_mongosetup
-
-    - name: Run tests
-      run: |
-        docker-compose -f docker-compose.test.yml up --build -d e2e_tests
+        docker-compose -f docker-compose.test.yml up --build
 
     - name: Shutdown services
       run: |
