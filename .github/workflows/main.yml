@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: Run E2E tests
 
 on:
   push:
@@ -29,7 +29,7 @@ jobs:
 
     - name: Build and run Docker Compose services
       run: |
-        docker-compose -f docker-compose.yml up -d
+        docker-compose -f docker-compose.test.yml up -d
         until docker exec $(docker ps -q -f name=e2e_mongo) mongo --host localhost:27017 --eval 'rs.status()' | grep 'PRIMARY'; do
           echo 'Waiting for MongoDB replica set to initialize...';
           sleep 2;
