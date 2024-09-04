@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  Publish Docker Image:
+  publishing_image_to_docker_hub:
     runs-on: ubuntu-latest
 
     env:

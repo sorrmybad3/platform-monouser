@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  Running E2E tests:
+  running_e2e_tests:
     runs-on: ubuntu-latest
 
     steps:
