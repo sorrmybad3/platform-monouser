@@ -46,3 +46,18 @@ model Employee {
 
   @@map("employees")
 }
+
+model Product {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  deleted Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  companyId String
+  shopId String
+
+  name String
+  quantity Int
+
+  @@map("products")
+}
