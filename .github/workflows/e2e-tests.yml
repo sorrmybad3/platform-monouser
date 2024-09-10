@@ -1,9 +1,11 @@
 name: Run E2E tests
 
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
+
+# concurrency:
+#   group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
+#   cancel-in-progress: true
 
 jobs:
   running_e2e_tests:
