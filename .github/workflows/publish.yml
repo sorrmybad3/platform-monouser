@@ -1,9 +1,11 @@
 name: Publish Docker Image When Pushing to Main
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+
+# concurrency:
+#   group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
+#   cancel-in-progress: true
 
 jobs:
   publishing_image_to_docker_hub:

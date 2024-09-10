@@ -4,8 +4,6 @@ export function validateHash(string: string, hash: string) {
   try {
     return compareSync(string, hash);
   } catch (error) {
-    //TODO: CONSOLE LOG RAW.
-    console.log(error);
     return false;
   }
 }
