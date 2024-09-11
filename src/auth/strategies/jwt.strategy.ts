@@ -14,11 +14,16 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: JwtPayload) {
+  async validate(payload: JwtPayload): Promise<JwtPayload> {
     const user = await this.authRepository.findById(payload.sub);
     if (user?.deleted) {
       throw new UnauthorizedException();
     }
-    return { userId: payload.sub, username: payload.username };
+    return {
+      sub: payload.sub,
+      username: payload.username,
+      companyId: payload.companyId,
+      shopId: payload.shopId,
+    };
   }
 }
