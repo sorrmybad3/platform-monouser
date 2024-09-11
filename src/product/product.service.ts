@@ -6,7 +6,7 @@ import { CreateProductDto } from './product.dto';
 export class ProductService {
   constructor(private readonly productRepository: ProductRepository) {}
 
-  async create(data: CreateProductDto) {
-    return await this.productRepository.create(data);
+  async create(companyId: string, shopId: string, data: CreateProductDto) {
+    return await this.productRepository.create(companyId, shopId, data);
   }
 }

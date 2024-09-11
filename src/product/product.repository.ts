@@ -6,11 +6,11 @@ import { CreateProductDto } from './product.dto';
 export class ProductRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(data: CreateProductDto) {
+  create(companyId: string, shopId: string, data: CreateProductDto) {
     return this.prisma.product.create({
       data: {
-        companyId: '1231',
-        shopId: '1231',
+        companyId,
+        shopId,
         ...data,
       },
     });

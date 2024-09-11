@@ -8,6 +8,8 @@ export class ProductController {
 
   @Post()
   create(@Body() data: CreateProductDto) {
-    return this.productService.create(data);
+    const companyId = 'company-id';
+    const shopId = 'shop-id';
+    return this.productService.create(companyId, shopId, data);
   }
 }
