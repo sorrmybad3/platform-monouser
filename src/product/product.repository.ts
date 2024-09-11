@@ -13,6 +13,11 @@ export class ProductRepository {
         shopId,
         ...data,
       },
+      select: {
+        id: true,
+        name: true,
+        quantity: true,
+      },
     });
   }
 }

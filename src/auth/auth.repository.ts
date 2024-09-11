@@ -26,6 +26,8 @@ export class AuthRepository {
       },
       select: {
         id: true,
+        companyId: true,
+        shopId: true,
         deleted: true,
         email: true,
         password: true,
